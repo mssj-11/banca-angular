@@ -16,6 +16,7 @@ import { AddInvestmentModalComponent } from './ui/add-investment-modal/add-inves
 import { ForeignExchangeComponent } from './foreign-exchange/foreign-exchange.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     MovementsComponent,
     AddInvestmentModalComponent,
     ForeignExchangeComponent,
-    LoginComponent
+    LoginComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

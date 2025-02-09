@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   title = 'banca';
   customer = Customer;
   isLoggedIn: boolean = false; // estado del login
+  isLoading = true; // estado del spinner
 
   constructor(private storage: LocalStorageService, private router: Router) { }
 
@@ -19,6 +20,12 @@ export class AppComponent implements OnInit {
     // Verifica si hay un usuario logueado
     const user = localStorage.getItem('user');
     this.isLoggedIn = !!user;
+
+    // Spinner
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+
   }
 
   logout() {
