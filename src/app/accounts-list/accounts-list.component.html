@@ -1,0 +1,98 @@
+<h1>Hola {{ customer.name}}</h1>
+<p>{{ customer | customerName }}</p>
+<div class="accounts">
+  <div class="balance-sum">
+    <span>Saldo total en cuentas</span>
+    <span class="balance">{{ customer.accounts | accountsBalance | currency}} MXN</span>
+  </div>
+  <account-card class="account-card" *ngFor="let account of customer.accounts" [account]="account"
+    (click)="showDetails(account)"></account-card>
+</div>
+
+
+<ng-template #bankOperationModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Operación Bancaria</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitOperation()">
+      <div class="mb-3">
+        <label for="fromAccount" class="form-label">Cuenta de Origen</label>
+        <input type="text" id="fromAccount" class="form-control" [(ngModel)]="operation.fromAccount" name="fromAccount"
+          required />
+      </div>
+
+      <div class="mb-3">
+        <label for="toAccount" class="form-label">Cuenta de Destino</label>
+        <input type="text" id="toAccount" class="form-control" [(ngModel)]="operation.toAccount" name="toAccount"
+          required />
+      </div>
+
+      <div class="mb-3">
+        <label for="balance" class="form-label">Balance</label>
+        <input type="number" id="balance" class="form-control" [(ngModel)]="operation.balance" name="balance" required
+          readonly />
+      </div>
+
+      <div class="mb-3">
+        <label for="movementType" class="form-label">Tipo de Movimiento</label>
+        <select id="movementType" class="form-control" [(ngModel)]="operation.movementType" name="movementType"
+          required>
+          <option value="deposit">Depósito</option>
+          <option value="withdrawal">Retiro</option>
+          <option value="transfer">Transferencia</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="amount" class="form-label">Cantidad de Dinero</label>
+        <input type="number" id="amount" class="form-control" [(ngModel)]="operation.amount" name="amount" required />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Realizar operación</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<!-- prueba sólamente -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Detalles de la cuenta</h5>
+  </div>
+  <div class="modal-body">
+    <p><strong>Account: </strong>{{ selectedAccount?.accountName }}</p>
+    <p><strong>Balance: </strong>{{ selectedAccount?.balance | currency:'MXN' }}</p>
+    <div ngbAccordion id="accordionTransaction">
+      <div ngbAccordionItem="">
+          <h2 ngbAccordionHeader>
+              <button ngbAccordionButton type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+              Transacciones
+              </button>
+          </h2>
+          <div id="collapse" ngbAccordionCollapse data-bs-parent="#accordionTransaction">
+              <div ngbAccordionBody class="overflow-y-auto">
+                <span>
+                  <div *ngIf="!selectedAccount?.transactions || selectedAccount?.transactions!.length <= 0; then noTransactionList; else transactionList">
+                  </div>
+                  <ng-template #noTransactionList>
+                    <p>No hay transacciones</p>
+                  </ng-template>
+                    <ng-template #transactionList>
+                        <transaction-list [transactions]="selectedAccount?.transactions"></transaction-list>
+                    </ng-template>
+                </span>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button><!--
+    <button type="button" class="btn btn-primary">Save changes</button>-->
+  </div>
+</ng-template>

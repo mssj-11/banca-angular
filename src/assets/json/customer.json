@@ -1,0 +1,22 @@
+{
+  "name": "Edgar",
+  "lastName": "Rangel",
+  "customerId": "1225235",
+  "email": "jakoujan@gmail.com",
+  "accounts": [
+    {
+      "accountId": "569856",
+      "customerId": "1225235",
+      "accountName": "Cuenta de ahorros",
+      "balance": 50000,
+      "transactions": []
+    },
+    {
+      "accountId": "784596",
+      "customerId": "1225235",
+      "accountName": "Cuenta Nomina",
+      "balance": 25000,
+      "transactions": []
+    }
+  ]
+}

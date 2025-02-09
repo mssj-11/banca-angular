@@ -1,0 +1,35 @@
+<div class="container account">
+    <h1 class="text-center">¡Hola, {{ customer.name}}, es un gusto tenerte de vuelta.</h1>
+    <h4 class="text-center mb-4"><i>¿Que necesitas hoy?</i></h4>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 account-img-card">
+            <img src="/assets/images/card.jpeg" alt="Imagen de Tarjeta" class="img-fluid">
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mx-auto">
+                <div class="card-body">
+                    <h5 class="card-title">Titular: <strong>{{ customer | customerName }}</strong></h5>
+
+                    <p class="card-text">
+                        <strong>Saldo disponible:</strong>
+                        {{ customer.accounts | accountsBalance | currency}} MXN
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Numero de Cuenta:</strong>
+                        XXXX-XXXX-XXXX-1234 <br/>
+                        <strong>Banco:</strong>
+                        BBVA
+                    </p>
+
+                    <a href="/accounts-list" class="btn btn-primary me-3">Ver Transacciones</a>
+                    <a href="/movements" class="btn btn-secondary">Depositar</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">Agregar Inversión</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Close click')"></button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label for="investmentAccount">Seleccionar Cuenta</label>
+    <select class="form-control" id="investmentAccount" [(ngModel)]="newInvestment.accountId">
+      <option *ngFor="let account of accounts" [value]="account.accountId">{{ account.accountName }} - {{ account.balance | currency:'MXN' }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="investmentBalance">Saldo</label>
+    <input type="number" class="form-control" id="investmentBalance" [(ngModel)]="newInvestment.balance" placeholder="Saldo de la inversión" />
+  </div>
+  <div class="form-group">
+    <label for="currency">Divisa</label>
+    <select class="form-control" id="currency" [(ngModel)]="selectedCurrency">
+      <option *ngFor="let currency of currencies" [value]="currency.code">{{ currency | currencyDescriptor }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="investRate">Tasa de Interés (%)</label>
+    <input type="number" class="form-control" id="investRate" [(ngModel)]="newInvestment.investRate" placeholder="Tasa de interés" />
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="addInvestment()">Agregar Inversión</button>
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Close click')">Cerrar</button>
+</div>

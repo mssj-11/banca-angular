@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4 class="modal-title">Comprar/Vender Divisas</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      
+      <div class="mb-3">
+        <label for="fromAccount" class="form-label">Cuenta de Origen</label>
+        <select class="form-control" formControlName="fromAccount">
+          <option disabled selected>Seleccione una cuenta</option>
+          <option *ngFor="let account of customer?.accounts" [ngValue]="account">
+            {{ account.accountName }} - {{ account.balance | currency:'MXN' }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="mb-3">
+        <label for="currency" class="form-label">Divisa</label>
+        <select class="form-control" formControlName="currency">
+          <option value="">Seleccione una divisa</option>
+          <option *ngFor="let currency of currencies" [value]="currency.code">{{ currency.code }} - {{ currency.name }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" formControlName="amount" />
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Tipo de operación</label>
+        <select class="form-control" formControlName="type">
+          <option value="buy">Comprar</option>
+          <option value="sell">Vender</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="form.invalid">Confirmar</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancelar</button>
+  </div>
+  

@@ -1,0 +1,23 @@
+<div class="account-movements">
+  <h1>Seleccione la cuenta para ver los movimientos</h1>
+
+  <div class="actions">
+    <button class="btn btn-light mb-2 me-2" (click)="openTransactionModal()">
+      Realizar Operación
+    </button>
+  </div>
+
+  <select class="form-select" [(ngModel)]="selectedAccount" (ngModelChange)="selectAccount($event)" >
+    <option *ngFor="let account of accounts" [ngValue]="account">{{ account | accountDescriptor }}
+      {{ account.balance | currency:'MXN' }}</option>
+  </select>
+
+  <div class="movements-list">
+    <div class="movement-item" *ngFor="let transaction of selectedAccount?.transactions">
+      <span>{{ transaction.transactionId }}</span>
+      <span>{{ transaction.transactionDate | date:'dd/MM/yyyy' }}</span>
+      <span>{{ transaction.amount| currency:'MXN' }}</span>
+      <span>{{ transaction.transactionType | transactionType }}</span>
+    </div>
+  </div>
+</div>

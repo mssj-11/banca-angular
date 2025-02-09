@@ -1,0 +1,39 @@
+<div class="foreign-exchange">
+    <h1>Intercambio de divisas</h1>
+    <div class="row">
+      <div class="col">
+        <label for="fromCurrency">Divisa de origen</label>
+        <select class="form-select" id="fromCurrency" [(ngModel)]="fromCurrency">
+          <option value="">Seleccione una divisa</option>
+          <option *ngFor="let currency of currencies" [value]="currency.code">{{ currency | currencyDescriptor }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="toCurrency">Divisa a</label>
+        <select class="form-select" id="toCurrency" [(ngModel)]="toCurrency">
+          <option value="">Seleccione una divisa</option>
+          <option *ngFor="let currency of currencies" [value]="currency.code">{{ currency | currencyDescriptor }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row spacer">
+      <div class="col">
+        <div class="actions">
+          <button class="btn btn-dark mt-3" (click)="calculate()">Calcular</button>
+        </div>
+      </div>
+    </div>
+    <div class="row spacer">
+      <div class="col">
+        <div class="result">
+          <h2>Resultado</h2>
+          <p *ngFor="let result of results">{{ result.amount | currency: result.currency }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ========== DIVISAS Start Section ========== -->
+<app-divisas-list></app-divisas-list>
+<!-- ========== End Section ========== -->

@@ -1,0 +1,39 @@
+<div class="investment-list">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2>Lista de Inversiones</h2>
+    <button class="btn btn-primary" (click)="openAddInvestmentModal()">Agregar Inversión</button>
+  </div>
+
+  <div class="form-group mt-3">
+    <label for="selectAccount">Seleccionar Cuenta</label>
+    <select class="form-control" id="selectAccount" [(ngModel)]="selectedAccountId" (change)="loadInvestments()">
+      <option *ngFor="let account of accounts" [value]="account.accountId">{{ account.accountName }} - {{ account.balance | currency:'MXN' }}</option>
+    </select>
+  </div>
+
+  <table class="table table-bordered table-striped mt-3">
+    <thead>
+      <tr>
+        <th>ID de Inversión</th>
+        <th>Saldo Inicial</th>
+        <th>Divisa</th>
+        <th>Tasa de Interés</th>
+        <th>Crecimiento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let investment of investments">
+        <td>{{ investment.investmentId }}</td>
+        <td>{{ investment.balance | currency: investment.currency }}</td>
+        <td>{{ investment.currency }}</td>
+        <!--
+        <td>{{ investment.balance | currency: 'MXN' }}</td>-->
+        <td>{{ investment.investRate }}%</td><!--
+        <td>{{ investment.growth | currency: 'MXN' }}</td>-->
+        <td>{{ investment.growth | currency: investment.currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="investments.length === 0">No hay inversiones disponibles para esta cuenta.</div>
+</div>

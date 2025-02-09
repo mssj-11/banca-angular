@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center mb-3 mt-5">
+    <h2>Monedas Compradas</h2>
+    <button class="btn btn-primary" (click)="openModal()">Comprar Divisa</button>
+  </div>
+  
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID Cuenta</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Cuenta</th>
+        <th scope="col">Divisa</th>
+        <th scope="col">Monto</th>
+        <th scope="col" class="text-center">Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.accountId || 'N/A'  }}</td>
+        <td>{{ transaction.transactionDate | date: 'short' }}</td>
+        <td>{{ transaction.accountName }}</td>
+        <td>{{ transaction.currency }}</td>
+        <td>{{ transaction.amount | number: '1.2-2' }} {{ transaction.currency }}</td>
+        <td class="text-center">
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-success': transaction.type === 'buy',
+              'bg-danger': transaction.type === 'sell'
+            }"
+          >
+            {{ transaction.type === 'buy' ? 'Compra' : 'Venta' }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
